@@ -1,0 +1,81 @@
+.game-root {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.game-layout {
+  display: flex;
+}
+
+.canvas-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.canvas-blocker {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+}
+
+/* Character dialogue overlay */
+
+.character-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.scene-dim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  animation: dim-in 0.4s ease both;
+}
+
+.character-sprite {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 60px;
+  animation: character-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.character-figure {
+  width: 160px;
+  height: 340px;
+  border-bottom: 3px solid;
+  opacity: 0.85;
+}
+
+.character-name {
+  margin-top: 14px;
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.character-emotion {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.25);
+  font-style: italic;
+}
+
+@keyframes dim-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes character-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

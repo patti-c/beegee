@@ -1,0 +1,228 @@
+.story-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.story-panel-label {
+  font-family: monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: rgba(255, 204, 0, 0.35);
+  padding: 14px 18px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.story-panel-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 18px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 204, 0, 0.15) transparent;
+}
+
+/* Story text lines */
+.panel-story-line {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #d8d4c8;
+  animation: entry-in 0.3s ease both;
+}
+
+/* Monologue entries */
+.panel-monologue {
+  border-left: 2px solid;  /* color applied via inline style */
+  padding-left: 10px;
+  animation: entry-in 0.35s ease both;
+}
+
+.panel-monologue-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.panel-monologue-skill {
+  font-family: monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(255, 204, 0, 0.65);
+}
+
+.panel-monologue-dc {
+  font-family: monospace;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.panel-monologue-line {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.55;
+  color: rgba(200, 195, 220, 0.7);
+}
+
+/* Controls */
+.story-panel-controls {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+  min-height: 52px;
+}
+
+.panel-choice-btn {
+  background: rgba(255, 204, 0, 0.06);
+  border: 1px solid rgba(255, 204, 0, 0.3);
+  color: #ffcc00;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 7px 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s;
+  animation: entry-in 0.25s ease both;
+}
+
+.panel-choice-btn:hover {
+  background: rgba(255, 204, 0, 0.14);
+}
+
+.panel-choice-btn.visited {
+  color: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 255, 255, 0.1);
+  background: none;
+}
+
+.panel-choice-btn.visited:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* DC prefix inside choice buttons */
+
+.choice-dc-prefix {
+  position: relative;
+  font-weight: bold;
+  margin-right: 4px;
+  cursor: help;
+}
+
+/* Skill tooltip */
+
+.skill-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  background: #0d0a1a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 10px 14px;
+  min-width: 180px;
+  z-index: 100;
+  pointer-events: none;
+  animation: entry-in 0.15s ease both;
+}
+
+.skill-tooltip-header {
+  font-family: monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.skill-tooltip-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: monospace;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 3px;
+}
+
+.skill-tooltip-row.bonus {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 10px;
+}
+
+.skill-tooltip-row.total {
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 2px;
+}
+
+.skill-tooltip-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 5px 0 6px;
+}
+
+.panel-continue-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 204, 0, 0.45);
+  font-family: monospace;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+  align-self: flex-end;
+  transition: color 0.15s;
+}
+
+.panel-continue-btn:hover {
+  color: #ffcc00;
+}
+
+.panel-empty {
+  font-family: monospace;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.1);
+  align-self: flex-end;
+}
+
+.panel-close-btn {
+  background: none;
+  border: 1px solid rgba(255, 204, 0, 0.25);
+  color: rgba(255, 204, 0, 0.5);
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  padding: 7px 18px;
+  cursor: pointer;
+  align-self: center;
+  transition: color 0.2s, border-color 0.2s;
+  animation: close-btn-in 0.4s ease both;
+}
+
+.panel-close-btn:hover {
+  color: rgba(255, 204, 0, 0.85);
+  border-color: rgba(255, 204, 0, 0.55);
+}
+
+.panel-close-btn.closing {
+  animation: close-btn-out 0.4s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes entry-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes close-btn-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes close-btn-out {
+  from { opacity: 1; transform: scaleX(1); }
+  to   { opacity: 0; transform: scaleX(0.6); }
+}

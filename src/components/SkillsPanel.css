@@ -1,0 +1,66 @@
+.skills-panel {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 204, 0, 0.15) transparent;
+}
+
+.skills-empty {
+  font-family: monospace;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.15);
+  padding: 20px 18px;
+}
+
+.skill-card {
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.skill-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+
+.skill-card-name {
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.skill-card-total {
+  font-family: monospace;
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+.skill-card-voice {
+  margin: 0 0 10px;
+  font-family: 'Georgia', serif;
+  font-size: 12px;
+  font-style: italic;
+  color: rgba(180, 175, 195, 0.5);
+  line-height: 1.4;
+}
+
+.skill-card-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.skill-breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: monospace;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.skill-breakdown-row.bonus {
+  color: rgba(255, 255, 255, 0.18);
+  font-size: 9px;
+}

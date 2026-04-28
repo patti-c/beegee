@@ -1,0 +1,122 @@
+.skill-check-backdrop {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  animation: fade-in 0.15s ease;
+}
+
+.skill-check-modal {
+  background: #0e0c1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 32px 40px;
+  min-width: 340px;
+  text-align: center;
+  animation: slide-up 0.2s ease;
+}
+
+.skill-check-modal.pass {
+  border-color: rgba(80, 220, 120, 0.4);
+  box-shadow: 0 0 40px rgba(80, 220, 120, 0.1);
+}
+
+.skill-check-modal.fail {
+  border-color: rgba(220, 80, 80, 0.4);
+  box-shadow: 0 0 40px rgba(220, 80, 80, 0.1);
+}
+
+.check-label {
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.check-skill-name {
+  font-family: monospace;
+  font-size: 22px;
+  letter-spacing: 4px;
+  color: #ddd;
+  margin-bottom: 28px;
+}
+
+.check-math {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.check-term {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.check-value {
+  font-family: monospace;
+  font-size: 32px;
+  color: #aaa;
+  line-height: 1;
+}
+
+.check-value.roll {
+  animation: pop-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  color: #fff;
+}
+
+.check-value.total {
+  font-size: 36px;
+  color: #fff;
+}
+
+.check-term-label {
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #444;
+  text-transform: uppercase;
+}
+
+.check-op {
+  font-family: monospace;
+  font-size: 20px;
+  color: #444;
+  margin-bottom: 14px;
+}
+
+.check-result {
+  font-family: monospace;
+  font-size: 18px;
+  letter-spacing: 3px;
+  animation: pop-in 0.35s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+.check-result.pass {
+  color: #50dc78;
+}
+
+.check-result.fail {
+  color: #dc5050;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(12px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes pop-in {
+  from { transform: scale(0.6); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
