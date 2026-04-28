@@ -1,73 +1,47 @@
-# React + TypeScript + Vite
+# beegee
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A point-and-click mystery investigation game running in the browser. Inspired by Phoenix Wright and Disco Elysium.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Vite + React + TypeScript** — UI and application shell
+- **PixiJS v8** — canvas rendering (scenes, hotspots, navigation)
+- **inkjs v2** — narrative scripting; `.ink` files compiled at build time via a custom Vite plugin
+- **Zustand** — global game state
+- **localStorage** — save/load
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Scene navigation across multiple locations
+- Hotspot interactions that trigger ink dialogue branches
+- NPC character dialogue with an animated overlay, emotional states that shift per branch, and visited choices tracked persistently
+- Skill check system: d10 roll + stat vs DC, with a modal result display
+- Inner monologue feed: skills narrate observations when they pass a threshold roll
+- Skill discovery: some skills are locked until story events unlock them
+- Inventory with slot-based equipment (left hand, right hand, headgear, pocket) and per-item slot restrictions
+- Item acquisition via story events, with a separate item catalog for discoverable items
+- Persistent flags readable in ink, enabling cross-scene state (`photo_examined` → new dialogue option with Vera)
+- Save/load persists: scene, flags, equipped items, discovered skills, visited choices, acquired items
 
-## Expanding the ESLint configuration
+## Ink external functions
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+These are available to all `.ink` scene files:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+| Function | Description |
+|---|---|
+| `skillCheck(skillId, threshold)` | Rolls d10 + stat; shows modal; returns 1/0 |
+| `triggerMonologue(skillId, threshold, line)` | Ambient inner monologue if skill discovered + roll passes |
+| `grantSkill(skillId)` / `removeSkill(skillId)` | Discover or hide a skill |
+| `setEmotion(characterId, emotion)` | Shift a character's emotional state (affects sprite) |
+| `setFlag(key, value)` / `getFlag(key)` | Persistent cross-scene flags; `getFlag` returns 1/0 |
+| `giveItem(itemId)` | Add a catalog item to inventory (idempotent) |
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Dev
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # output to dist/
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Scene ink files live in `src/ink/`. `story.ink` is the root — it declares all externals and includes the per-scene files. Add a new scene by creating a `.ink` file and adding `INCLUDE yourscene.ink` to `story.ink`.
